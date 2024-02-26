@@ -21,9 +21,12 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'qual.pem', keyFileVariable: 'SSH_PRIVATE_KEY')]) {
                     bat '''
-                        echo %SSH_PRIVATE_KEY% > private_key.pem
-                        icacls private_key.pem /inheritance:r /grant:r "%USERNAME%":(R)
-                        ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"
+                        echo %SSH_PRIVATE_KEY% > C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\nodejs\\private_key.pem
+                        $acl = Get-Acl C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\nodejs\\private_key.pem
+                        $rule = New-Object System.Security.AccessControl.FileSystemAccessRule("SYED-SAAD$", "Read", "Allow")
+                        $acl.SetAccessRule($rule)
+                        Set-Acl C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\nodejs\\private_key.pem $acl
+                        ssh -o StrictHostKeyChecking=no -i C:\\ProgramData\\Jenkins\\.jenkins\\workspace\\nodejs\\private_key.pem ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"
                     '''
                 }
             }
