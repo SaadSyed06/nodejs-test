@@ -1,0 +1,40 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building the Node.js application...'
+                sh 'npm install'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Running tests...'
+                sh 'npm test'
+                echo "Tests completed successfully"
+            }
+        }
+
+        stages {
+        stage('Deploy to EC2') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'qual.pem', keyFileVariable: 'SSH_PRIVATE_KEY')]) {
+                    sh '''
+                        ssh -o StrictHostKeyChecking=no -i "$SSH_PRIVATE_KEY" ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"
+                    '''
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline succeeded!'
+        }
+        failure {
+            echo 'Pipeline failed!'
+        }
+    }
+}
