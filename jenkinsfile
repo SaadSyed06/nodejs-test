@@ -21,37 +21,37 @@ pipeline {
             steps {
                 script {
                     // Write the private key to a temporary file
-                    writeFile file: 'private_key.pem', text: '''\
------BEGIN RSA PRIVATE KEY-----
-MIIEowIBAAKCAQEA1j4PcoHUTG5s1IHjSkngJaCa7SuzgfnvKCCFChHdYuKu5w6/
-Dsf3vrqnrB6GRkJGIKju8S075nee0EwHf1sK0q3IdrEAYx23Kw/TQc5IlDMpOZ0Y
-wRyfuDHCsbzkt4qIQ1Var0b+/7krHAG8kv/EHarYyvvkx4PnYZMZLOnvlAaGgc9u
-67qlpIF3Q9EVFnA/PI87cex/a+1sa1YahJ2AgLjTbOGE8u3eSgXGJWPBYtilgcjk
-9ykfoKp52MEZd1R1mamE958EkomYhWwzTj+OeM/lSwPtxSd4UGk9Vb3Mpn+VVTNr
-wl6GV5Zz8/olPXlZwYgW3rqh/Ftty4Nf1ByS9wIDAQABAoIBAFpstT5iV8WusdZ7
-wAAh8C5RfDJwSIKqh+uK1jwq0CMlhCbXzYIimolw5MY71/adkFXGl5tJuUeL44cN
-H/j75zSGzt5x1LUA3MebFVJoC7Apa9P6X3FacHtg3UkBbhOdr+ejhfQG5ifu8qgO
-f5YXx6Gx83CxIp2nKajAWlbfohP6a2VL6YSNuv4m0T0RO5SVhmc45jb2aDYpsRr0
-o/YHuBCV4+vBk2mfMGQzicPNAd+aj+yZ41lqcFVXQXh0CGHMTESD4haLXVi2rQw3
-yTXVijPbWhmeXsboQbRTtxKcjZp8OA1p1UfmueAqtJYyBNOL63Z7DgoA+5yZF4Me
-GSHPBKkCgYEA7I1dHGOLLVuPypvHZo52FPQc3KcFL0hxNMax43Yui9wQzLgzijtS
-beKpKZIMqmpNenrvB6MQMiXDoXhj846WDyNYHjO2kuYhIU+6wTcJbb3KiPthpccw
-8vRBcvjOhu2NkwQIbwMcVSrPmaDAvO5eAopqRrLVklR/Ztimti7p9vUCgYEA59sm
-alTPI8UspwCyCoIUsviXtbTq2ya8DiNcrOb0d093ILl/L1t4ERMYsw1195TykXoh
-xDLYsRDrGE/gT2aFWjXdivwqFLKsZh3tlt+JRgrsNMY9jnAVvcgg6Q776Z4D5NDZ
-hOhjJqAUCoHOzymuq2KN4EPkfawz6SVcP583trsCgYBSqALFDLNxIfFYpp5CY703
-DSWYpHPXVcTY4CUAiicxj6//GM5JmvjulKjvca0jTwnLpnEnhf7+xttY7KxgSo58
-s6jyxLcjFW62KRnkscqFoi/HNa+lMbkU6+yCtBXWZ+N0X5Bi2f9ocxEfaWBvpAsN
-cDg6g/rEqunpkgKO3k26kQKBgGnUVDKQx4PSSlFoNdwqB/yxD752+ARUJ95kMbcS
-LGARO5UKVo1tON7CUrHX4RLDP/07PBJsCxC3YjfUrdRQPWox0A/Sjfqom5x46KvH
-GMeJ0Ms9+Xb8nk/j+3Glz0KRR8G3urG5yRgmVT9+hMF2iy3bbFsDYlYitgcjcHnx
-2OJlAoGBAMAV5Ts5EvXqdL9N44MOJn2awcrs013KHSUdWuuxy12aHegiLd90BofD
-JQ8KcVm/dPgNQz9Z/c6hTvdzj2rjsV1SDVJUKW1Amv/gcYcb3vrRPigeLxvgv930
-41aNaw5W7eQ9YBBSTkuShlOFVNKr1fmVF6N9o0k5iBfbfNVjVFgK
------END RSA PRIVATE KEY-----
-'''
-                    // Set appropriate permissions to the private key file
-                    bat 'icacls private_key.pem /inheritance:r /grant:r "SYED-SAAD$":(R)'
+//                     writeFile file: 'private_key.pem', text: '''\
+// -----BEGIN RSA PRIVATE KEY-----
+// MIIEowIBAAKCAQEA1j4PcoHUTG5s1IHjSkngJaCa7SuzgfnvKCCFChHdYuKu5w6/
+// Dsf3vrqnrB6GRkJGIKju8S075nee0EwHf1sK0q3IdrEAYx23Kw/TQc5IlDMpOZ0Y
+// wRyfuDHCsbzkt4qIQ1Var0b+/7krHAG8kv/EHarYyvvkx4PnYZMZLOnvlAaGgc9u
+// 67qlpIF3Q9EVFnA/PI87cex/a+1sa1YahJ2AgLjTbOGE8u3eSgXGJWPBYtilgcjk
+// 9ykfoKp52MEZd1R1mamE958EkomYhWwzTj+OeM/lSwPtxSd4UGk9Vb3Mpn+VVTNr
+// wl6GV5Zz8/olPXlZwYgW3rqh/Ftty4Nf1ByS9wIDAQABAoIBAFpstT5iV8WusdZ7
+// wAAh8C5RfDJwSIKqh+uK1jwq0CMlhCbXzYIimolw5MY71/adkFXGl5tJuUeL44cN
+// H/j75zSGzt5x1LUA3MebFVJoC7Apa9P6X3FacHtg3UkBbhOdr+ejhfQG5ifu8qgO
+// f5YXx6Gx83CxIp2nKajAWlbfohP6a2VL6YSNuv4m0T0RO5SVhmc45jb2aDYpsRr0
+// o/YHuBCV4+vBk2mfMGQzicPNAd+aj+yZ41lqcFVXQXh0CGHMTESD4haLXVi2rQw3
+// yTXVijPbWhmeXsboQbRTtxKcjZp8OA1p1UfmueAqtJYyBNOL63Z7DgoA+5yZF4Me
+// GSHPBKkCgYEA7I1dHGOLLVuPypvHZo52FPQc3KcFL0hxNMax43Yui9wQzLgzijtS
+// beKpKZIMqmpNenrvB6MQMiXDoXhj846WDyNYHjO2kuYhIU+6wTcJbb3KiPthpccw
+// 8vRBcvjOhu2NkwQIbwMcVSrPmaDAvO5eAopqRrLVklR/Ztimti7p9vUCgYEA59sm
+// alTPI8UspwCyCoIUsviXtbTq2ya8DiNcrOb0d093ILl/L1t4ERMYsw1195TykXoh
+// xDLYsRDrGE/gT2aFWjXdivwqFLKsZh3tlt+JRgrsNMY9jnAVvcgg6Q776Z4D5NDZ
+// hOhjJqAUCoHOzymuq2KN4EPkfawz6SVcP583trsCgYBSqALFDLNxIfFYpp5CY703
+// DSWYpHPXVcTY4CUAiicxj6//GM5JmvjulKjvca0jTwnLpnEnhf7+xttY7KxgSo58
+// s6jyxLcjFW62KRnkscqFoi/HNa+lMbkU6+yCtBXWZ+N0X5Bi2f9ocxEfaWBvpAsN
+// cDg6g/rEqunpkgKO3k26kQKBgGnUVDKQx4PSSlFoNdwqB/yxD752+ARUJ95kMbcS
+// LGARO5UKVo1tON7CUrHX4RLDP/07PBJsCxC3YjfUrdRQPWox0A/Sjfqom5x46KvH
+// GMeJ0Ms9+Xb8nk/j+3Glz0KRR8G3urG5yRgmVT9+hMF2iy3bbFsDYlYitgcjcHnx
+// 2OJlAoGBAMAV5Ts5EvXqdL9N44MOJn2awcrs013KHSUdWuuxy12aHegiLd90BofD
+// JQ8KcVm/dPgNQz9Z/c6hTvdzj2rjsV1SDVJUKW1Amv/gcYcb3vrRPigeLxvgv930
+// 41aNaw5W7eQ9YBBSTkuShlOFVNKr1fmVF6N9o0k5iBfbfNVjVFgK
+// -----END RSA PRIVATE KEY-----
+// '''
+//                     // Set appropriate permissions to the private key file
+//                     bat 'icacls private_key.pem /inheritance:r /grant:r "SYED-SAAD$":(R)'
 
                     // SSH into the server and execute commands
                     bat 'ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"'
