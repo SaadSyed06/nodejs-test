@@ -21,7 +21,8 @@ pipeline {
             steps {
                 script {
                     // Write the private key to a temporary file
-                    writeFile file: 'private_key.pem', text: '-----BEGIN RSA PRIVATE KEY-----
+                    writeFile file: 'private_key.pem', text: '''\
+-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEA1j4PcoHUTG5s1IHjSkngJaCa7SuzgfnvKCCFChHdYuKu5w6/
 Dsf3vrqnrB6GRkJGIKju8S075nee0EwHf1sK0q3IdrEAYx23Kw/TQc5IlDMpOZ0Y
 wRyfuDHCsbzkt4qIQ1Var0b+/7krHAG8kv/EHarYyvvkx4PnYZMZLOnvlAaGgc9u
@@ -47,7 +48,8 @@ GMeJ0Ms9+Xb8nk/j+3Glz0KRR8G3urG5yRgmVT9+hMF2iy3bbFsDYlYitgcjcHnx
 2OJlAoGBAMAV5Ts5EvXqdL9N44MOJn2awcrs013KHSUdWuuxy12aHegiLd90BofD
 JQ8KcVm/dPgNQz9Z/c6hTvdzj2rjsV1SDVJUKW1Amv/gcYcb3vrRPigeLxvgv930
 41aNaw5W7eQ9YBBSTkuShlOFVNKr1fmVF6N9o0k5iBfbfNVjVFgK
------END RSA PRIVATE KEY-----'
+-----END RSA PRIVATE KEY-----
+'''
                     // Set appropriate permissions to the private key file
                     bat 'icacls private_key.pem /inheritance:r /grant:r "SYED-SAAD$":(R)'
 
