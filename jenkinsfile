@@ -5,29 +5,24 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the Node.js application...'
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running tests...'
-                sh 'npm test'
+                bat 'npm test'
                 echo "Tests completed successfully"
             }
         }
 
         stage('Deploy to EC2') {
             steps {
-                script {
-                    def remote = [:]
-                    remote.name = 'EC2'
-                    remote.host = '52.66.10.215'
-                    remote.user = 'ubuntu'
-                    remote.identityFile = [credentials('qual.pem')]
-                    remote.allowAnyHosts = true // Use this if you don't want to verify the host key
-                    remote.command = "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"
-                    sshCommand remote: remote
+                withCredentials([sshUserPrivateKey(credentialsId: 'qual.pem', keyFileVariable: 'SSH_PRIVATE_KEY')]) {
+                    bat '''
+                        ssh -o StrictHostKeyChecking=no -i "%SSH_PRIVATE_KEY%" ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"
+                    '''
                 }
             }
         }
