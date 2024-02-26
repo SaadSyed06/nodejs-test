@@ -19,7 +19,7 @@ pipeline {
 
         stage('Deploy to EC2') {
             steps {
-                withCredentials([file(credentialsId: 'qual.pem', variable: 'SSH_PRIVATE_KEY')]) {
+                withCredentials([file(credentialsId: 'ec2-private-key', variable: 'SSH_PRIVATE_KEY')]) {
                     bat '''
                         ssh -o StrictHostKeyChecking=no -i %SSH_PRIVATE_KEY% ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"
                     '''
