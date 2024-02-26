@@ -17,7 +17,6 @@ pipeline {
             }
         }
 
-        stages {
         stage('Deploy to EC2') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'qual.pem', keyFileVariable: 'SSH_PRIVATE_KEY')]) {
@@ -27,7 +26,7 @@ pipeline {
                 }
             }
         }
-    }
+    } // Closing stages block
 
     post {
         success {
@@ -37,4 +36,4 @@ pipeline {
             echo 'Pipeline failed!'
         }
     }
-}
+} // Closing pipeline block
