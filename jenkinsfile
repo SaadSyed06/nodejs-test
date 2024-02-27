@@ -54,7 +54,7 @@ pipeline {
 //                     bat 'icacls private_key.pem /inheritance:r /grant:r "SYED-SAAD$":(R)'
 
                     // SSH into the server and execute commands
-                    bat 'ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@52.66.10.215 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"'
+                    bat 'ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@65.1.64.216 "cd /home/ubuntu/Nodejs && git pull origin main && npm install && npm start"'
                 }
             }
         }
